@@ -8,6 +8,7 @@
 \documentclass[12pt]{article}
 
 \usepackage{tikz}
+\usepackage{graphicx}
 
 \begin{document}
 \maketitle
@@ -72,7 +73,6 @@ In Figure~\ref{fig:TesseractProjection}, both the inner and outer cubes are the 
 It is analogous to how in Figure~\ref{fig:CubeProjection}, one square is smaller than the other, even though they would be the same size in the real cube.\\
 In addition to this, all the pyramid-shaped areas in Figure~\ref{fig:TesseractProjection} are cubes, like how the trapezoids in Figure~\ref{fig:CubeProjection} are actually squares.
 
-
 \paragraph{Slicing}
 The other method is simply taking a 3d cross-section of the hypershape. This is like cutting a 3d shape with a knife, and looking at the shape of the cut.
 If a cube is cut in line with one of the sides, the cross section will be a square.
@@ -86,8 +86,53 @@ However, moving along the 4th dimension would make the shapes appear to morph an
 
 \subsection{Potential challenges}
 4D maths is very hard, and I have been working on and off on it for over a year now, without significant headway being made. 
-However, since this is actually being done for the uni now, I should be able to get more support from uni staff with this matter, which shopuld help me along massively.\\
+However, since this is actually being done for the university now, I should be able to get more support from university staff with this matter, which should help me along massively.\\
 The player might also have trouble understanding what is going on when they move through the 4th dimension. I could try to mitigate this through storytelling or tutorials, and through the visuals.
 I could try fading the geometry along the 4th dimension, so that the player could see it fading in and out, however that may make it hard to discern what is passable and not.
+
+\section{Broader context}
+In my opinion, I feel like there aren't enough games set in the 4th dimension like this.
+I believe that the largest one is Miegakure, however that has been in development since 2009, with no final release date in sight.\\
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{Media/Miegakure.png}
+    \caption{Miegakure}
+\end{figure}
+There are also not a huge amount of games that defy normal space in general. The most popular are probably the Portal series, which link two normally separate spaces together via a portal.
+There are also games like Manifold Garden or Antichamber, which mess with space and reality in their own way, but they aren't set in the 4th dimension.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{Media/ManifoldGarden.png}
+    \caption{Manifold Garden}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{Media/Portal.png}
+    \caption{Portal}
+\end{figure}
+
+Part of what I want to do with games is create novel experiences, and while 4D is not an completely new concept in games, its still relatively unexplored.
+Maybe after creating it, ill find there is a very good reason why nobody wants games like this, but I can;t really know until I try it.
+
+\section{Project feasability}
+I believe that this is a project that it is possible for me to complete. While in the past I have struggled with this kind of maths, I am confident that I have improved in my abilities.
+
+\subsection{Breakdown}
+The hardest part of this will be to compute the 3d intersection of the 4d shapes.
+However, as long as the cutting plane is not rotated, and remains orthogonal to the 4th dimension, each edge can be tested to find the intersection points.
+Then, a solid can be reconstructed. If two edges share a face, and are both intersected by the cutting plane, then an edge can be drawn between them.
+
+Everything else can be handled by normal OpenGL rendering and inputs.
+
+\subsection{Contract requirements}
+In order for this proposal to be accepted, it must meet the requirements in teh appendix of the assignment brief.
+\begin{itemize}
+    \item "A Scene containing at least 1 textured mesh and at least 1 light source" - The game will have textured walls and objects, and ceiling lights.
+    \item "Standard first person controls" - All controls will be as normal for a first person game, with the addition of a pair of controls to move through the 4th dimension, which will likely be Q and E.
+    \item "At least 2 of the following graphics and simualtion techniques..." - I will be implementing collision detection, and the 4th dimension aspect could be considered 2Non-realistic rendering", or the catch-all "Other advanced rendering or simulation techniques of your choice".
+    \item "Some aspect intended to create fun and/or engagement" - This will be completing a simple gameplay objective, as the game is a puzzle game.
+\end{itemize}
+
 
 \end{document}
