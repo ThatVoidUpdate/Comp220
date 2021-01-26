@@ -5,3 +5,4 @@
   - Include the wireframe hypercube
 - Explain the concept of the game
   - Puzzle game like portal
+- Maybe explain the maths behind the rendering

@@ -9,6 +9,7 @@
 
 \usepackage{tikz}
 \usepackage{graphicx}
+\usepackage{amsmath}
 
 \begin{document}
 \maketitle
@@ -126,7 +127,39 @@ I believe that this is a project that it is possible for me to complete. While i
 \subsection{Breakdown}
 The hardest part of this will be to compute the 3D intersection of the 4D shapes.
 However, as long as the cutting plane is not rotated, and remains orthogonal to the 4th dimension, each edge can be tested to find the intersection points.
-Then, a solid can be reconstructed. If two edges share a face, and are both intersected by the cutting plane, then an edge can be drawn between them.
+
+Each 4D object can have either a 4D bounding box, or more simply a maximum and minimum W coordinate stored, which will help with optimisation.
+Each edge also has both ends stored, as well as the gradients in each direction.
+
+\[
+   \begin{Bmatrix} 
+      x = x_0 + t a \\ 
+      y = y_0 + t b \\ 
+      z = z_0 + t c \\
+      w = w_0 + t d 
+   \end{Bmatrix}
+   \textrm{where t is between 0 and 1}
+\]
+
+\[
+   \begin{Bmatrix} 
+      a = (x_1 - x_0) / \lvert\lvert x_1-x_0 \rvert\rvert \\ 
+      b = (y_1 - y_0) / \lvert\lvert y_1-y_0 \rvert\rvert \\ 
+      c = (z_1 - z_0) / \lvert\lvert z_1-z_0 \rvert\rvert \\ 
+      d = (w_1 - w_0) / \lvert\lvert w_1-w_0 \rvert\rvert \\ 
+   \end{Bmatrix}
+\]
+
+When the W coordinate is changed, each object can be checked to see if the W coordinate is within its bounds. If it is, then each edge will be checked.
+It will use the equation
+\[
+  \dfrac{w-w_0}{d} = t  
+\]
+
+to calculate t, then if it is between 0 and 1 the edge has an intersection.
+If it does have an intersection, the intersection point in 3d space can be calculated with the first set of equations.
+If 2 edges share a face, and are also both intersected, then the two intersection points should be joined with an edge.
+
 
 Everything else can be handled by normal OpenGL rendering and inputs.
 
