@@ -128,32 +128,23 @@ I believe that this is a project that it is possible for me to complete. While i
 The hardest part of this will be to compute the 3D intersection of the 4D shapes.
 However, as long as the cutting plane is not rotated, and remains orthogonal to the 4th dimension, each edge can be tested to find the intersection points.
 
-Each 4D object can have either a 4D bounding box, or more simply a maximum and minimum W coordinate stored, which will help with optimisation.
-Each edge also has both ends stored, as well as the gradients in each direction.
+Each 4D object can have either a 4D bounding box, or more simply a maximum and minimm W coordinate stored, which will help with optimisation.
+Each edge also has both ends stored, so that it can be expressed in a vector form.
 
 \[
    \begin{Bmatrix} 
-      x = x_0 + t a \\ 
-      y = y_0 + t b \\ 
-      z = z_0 + t c \\
-      w = w_0 + t d 
+      x = x_0 + t (x_1 - x_0) \\ 
+      y = y_0 + t (y_1 - y_0) \\ 
+      z = z_0 + t (z_1 - z_0) \\
+      w = w_0 + t (w_1 - w_0)
    \end{Bmatrix}
    \textrm{where t is between 0 and 1}
-\]
-
-\[
-   \begin{Bmatrix} 
-      a = (x_1 - x_0) / \lvert\lvert x_1-x_0 \rvert\rvert \\ 
-      b = (y_1 - y_0) / \lvert\lvert y_1-y_0 \rvert\rvert \\ 
-      c = (z_1 - z_0) / \lvert\lvert z_1-z_0 \rvert\rvert \\ 
-      d = (w_1 - w_0) / \lvert\lvert w_1-w_0 \rvert\rvert \\ 
-   \end{Bmatrix}
 \]
 
 When the W coordinate is changed, each object can be checked to see if the W coordinate is within its bounds. If it is, then each edge will be checked.
 It will use the equation
 \[
-  \dfrac{w-w_0}{d} = t  
+  \dfrac{W-w_0}{w_1} = t  
 \]
 
 to calculate t, then if it is between 0 and 1 the edge has an intersection.
